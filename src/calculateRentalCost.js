@@ -3,18 +3,26 @@
  *
  * @return {number}
  */
+
+// Виносимо константи у верхню частину файлу
+const DAILY_RATE = 40;
+const SHORT_TERM_DAYS = 3;
+const SHORT_TERM_DISCOUNT = 20;
+const LONG_TERM_DAYS = 7;
+const LONG_TERM_DISCOUNT = 50;
+
 function calculateRentalCost(days) {
-  if (days < 3) {
-    return days * 40;
+  // Використовуємо константи замість "магічних чисел"
+  if (days < SHORT_TERM_DAYS) {
+    return days * DAILY_RATE;
   }
 
-  if (days > 2 && days < 7) {
-    return days * 40 - 20;
+  if (days >= SHORT_TERM_DAYS && days < LONG_TERM_DAYS) {
+    return days * DAILY_RATE - SHORT_TERM_DISCOUNT;
   }
 
-  if (days > 6) {
-    return days * 40 - 50;
-  }
+  // Якщо days >= LONG_TERM_DAYS
+  return days * DAILY_RATE - LONG_TERM_DISCOUNT;
 }
 
 module.exports = calculateRentalCost;
